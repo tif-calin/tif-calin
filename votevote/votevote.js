@@ -13,12 +13,12 @@ const populateSelect = (domSlct, lstOpts, lstVals = null) => {
     }
 };
 
-const makeDot = color => {
+const makeDot = (color, colorVal) => {
     const dot = document.createElement('div');
 
     dot.textContent = 'x';
     dot.value = color;
-    dot.style.backgroundColor = `rgb(${COLORS[color].map(x => x * 256).join(', ')})`;
+    dot.style.backgroundColor = colorVal;
     dot.classList.add('citizen-circle');
     dot.addEventListener('click', e => {
         let tgt = e.target;
@@ -48,16 +48,14 @@ populateSelect(slcCnds, Object.keys(COLORS));
 
 btnVtrAdd.addEventListener('click', () => {
     // add a div circle to the roster div with the name in select
-    // remove that color from select if which === "candidates"
-    const new_vtr = makeDot(slcVtrs.value);
+    const new_vtr = makeDot(slcVtrs.value, `rgb(${COLORS[slcVtrs.value].map(x => x * 256).join(', ')})`);
 
     divVtrRst.appendChild(new_vtr);
 });
 
 btnCndAdd.addEventListener('click', () => {
-    // add a div circle to the roster div with the name in select
-    // remove that color from select if which === "candidates"
-    const new_cnd = makeDot(slcCnds.value);
+    // add a div circle to the roster div with the name in select and remove that color from select 
+    const new_cnd = makeDot(slcCnds.value, `rgb(${COLORS[slcCnds.value].map(x => x * 256).join(', ')})`);
 
     for (let i = 0; i < slcCnds.length; i++) {
         if (slcCnds[i].value === slcCnds.value) slcCnds.remove(i);
