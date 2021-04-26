@@ -1,1 +1,15 @@
 @import url('./_fonts.css');
+
+.wrapper-h {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.wrapper-v {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
