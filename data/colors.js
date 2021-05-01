@@ -63,3 +63,7 @@ export const COLORS = {
     "yellow": [1, 1, 0],
     "zaffre": [0, 0.078, 0.659]
 }
+
+export CONST colorsHEX = {
+
+}
