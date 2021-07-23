@@ -1,4 +1,5 @@
-### Hi there 👋
+### all about [culi](https://www.culi.page)
+**pronouns**: *they/them* or *he/him*
 
 <!--
 **tif-calin/tif-calin** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
