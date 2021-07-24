@@ -1,36 +1,37 @@
 // imports
-import { COLORS } from '../data/colors.js';
+import COLORS from '../data/colors.js';
 
 // define functions
 const populateSelect = (domSlct, lstOpts, lstVals = null) => {
-    if (!lstVals) lstVals = lstOpts;
+  if (!lstVals) lstVals = lstOpts;
 
-    for (let i = 0; i < lstOpts.length; i++) {
-        const option = document.createElement('option');
-        option.textContent = lstOpts[i];
-        option.value = lstVals[i];
-        domSlct.appendChild(option);
-    }
+  for (let i = 0; i < lstOpts.length; i++) {
+    const option = document.createElement('option');
+    option.textContent = lstOpts[i];
+    option.value = lstVals[i];
+    domSlct.appendChild(option);
+  }
 };
 
-const makeDot = (color, colorVal) => {
-    const dot = document.createElement('div');
+const makeDot = (color, hex) => {
+  const dot = document.createElement('div');
 
-    dot.textContent = 'x';
-    dot.value = color;
-    dot.style.backgroundColor = colorVal;
-    dot.classList.add('citizen-circle');
-    dot.addEventListener('click', e => {
-        let tgt = e.target;
-        if (tgt.parentNode.id === "roster-candidates") {
-            const option = document.createElement("option");
-            option.text = tgt.value;
-            slcCnds.add(option);
-        }
-        tgt.parentNode.removeChild(tgt);
-    })
+  dot.textContent = 'x';
+  dot.value = color;
+  dot.style.backgroundColor = hex;
+  dot.classList.add('citizen-circle');
 
-    return dot;
+  dot.addEventListener('click', e => {
+    let tgt = e.target;
+    if (tgt.parentNode.id === "roster-candidates") {
+      const option = document.createElement("option");
+      option.text = tgt.value;
+      slcCnds.add(option);
+    }
+    tgt.parentNode.removeChild(tgt);
+  })
+
+  return dot;
 };
 
 // grab dom elements
@@ -46,20 +47,20 @@ const divCndRst = document.getElementById('roster-candidates');
 populateSelect(slcVtrs, Object.keys(COLORS));
 populateSelect(slcCnds, Object.keys(COLORS));
 
-btnVtrAdd.addEventListener('click', () => {
-    // add a div circle to the roster div with the name in select
-    const new_vtr = makeDot(slcVtrs.value, `rgb(${COLORS[slcVtrs.value].map(x => x * 256).join(', ')})`);
-
-    divVtrRst.appendChild(new_vtr);
-});
-
 btnCndAdd.addEventListener('click', () => {
     // add a div circle to the roster div with the name in select and remove that color from select 
-    const new_cnd = makeDot(slcCnds.value, `rgb(${COLORS[slcCnds.value].map(x => x * 256).join(', ')})`);
+    const new_cnd = makeDot(slcCnds.value, COLORS[slcCnds.value]);
 
     for (let i = 0; i < slcCnds.length; i++) {
         if (slcCnds[i].value === slcCnds.value) slcCnds.remove(i);
     }
 
     divCndRst.appendChild(new_cnd);
+});
+
+btnVtrAdd.addEventListener('click', () => {
+    // add a div circle to the roster div with the name in select
+    const new_vtr = makeDot(slcVtrs.value, COLORS[slcVtrs.value]);
+
+    divVtrRst.appendChild(new_vtr);
 });
