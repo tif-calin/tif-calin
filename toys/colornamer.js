@@ -3,7 +3,11 @@ import { hex2rgb, rgb2hex } from '../utils/utils.js';
 const URL = 'https://colornames.org/search/results/?type=exact&query=';
 
 const fetchTopHex = async query => {
-  const res = await fetch(URL + query).then(res => res.text());
+  const res = await fetch(URL + query, {
+    headers: {
+      'Access-Control-Allow-Origin': 'https://www.culi.page/'
+    }
+  }).then(res => res.text());
   const html = (new DOMParser()).parseFromString(res, 'text/html');
 
   const rgbRaw = html.querySelector('a.freshButton').style.backgroundColor;
