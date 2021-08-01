@@ -1,10 +1,14 @@
 @import url('./_style.css');
 
+main {
+  font-family: 'Cabin', sans-serif;
+}
+
 main > nav {
   margin: 1rem;
 }
 
-#toy-container > *{
+#toy-container > * {
   margin: 1rem;
   padding: 1rem;
   border-radius: 5px;
@@ -33,13 +37,13 @@ main > nav {
 }
 
 .solar-noon-visual > div:first-child {
-  background-color: #b5d6e0cc;
+  background: linear-gradient(90deg, black, #b5d6e088);
 }
 .solar-noon-visual > div:nth-child(2) {
   background: linear-gradient(90deg, #b5d6e0, #c7e1e5, #ffef7a, #f7c16a, #f46a55);
 }
 .solar-noon-visual > div:last-child {
-  background-color: #f46a55cc;
+  background: linear-gradient(90deg, #f46a5588, black);
 }
 
 .solar-noon-visual > div > div {
@@ -51,12 +55,12 @@ main > nav {
 /* color-avatar */
 .color-avatar {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
 }
 
 .color-avatar .avatar {
-  margin-left: 1rem;
+  margin: 0.5rem;
   width: 2rem;
   height: 2rem;
   border-radius: 5px;
