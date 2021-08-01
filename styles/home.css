@@ -77,5 +77,16 @@ main > nav {
 }
 
 .color-namer > span {
-  margin-top: 1rem;
+  background-color: #fffc;
+  text-align: center;
+}
+
+.color-namer > input {
+  margin: 0;
+}
+
+.color-namer pre {
+  padding: 1rem;
+  background-color: whitesmoke;
+  font-family: 'Courier New', Courier, monospace;
 }

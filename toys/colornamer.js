@@ -23,20 +23,28 @@ export default opts => {
   const input = document.createElement('input');
   input.type = 'text';
   const span = document.createElement('span');
-  span.backgroundColor = 'fffa';
+  const pre = document.createElement('pre');
+  pre.appendChild(document.createElement('code'));
 
   // add event handler for input
   input.addEventListener('change', e => {
     e.target.value = e.target.value.trim();
 
     fetchTopHex(e.target.value)
-      .then(arr => parent.style.backgroundColor = arr[0])
-      .then(arr => span.textContent = `the top match is ${arr[0]} with a tally of ${arr[2]}`)
+      .then(arr => {
+        parent.style.backgroundColor = arr[0];
+        span.textContent = `the top match is ${arr[0]} with a tally of ${arr[2]}`;
+        const codeText = `const colors =
+          \t${e.target.value}: '${arr[0]}',
+          \t${e.target.value}: [${arr[1].join(', ')}],\n}
+        `.replace(/[ \t\r]+/g, ' ').replace(/\n+ /g, '\n  ');
+        pre.children[0].textContent = codeText;
+      })
       .catch(err => console.log(err))
     ;
   });
 
   // append children and return parent
-  parent.append(input, span);
+  parent.append(span, input, pre);
   return parent;
 };
