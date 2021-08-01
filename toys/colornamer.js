@@ -4,19 +4,18 @@ const CORS_PROXY = 'https://api.allorigins.win/get?url=';
 const URL = 'https://colornames.org/search/results/?type=exact&query=';
 
 const fetchTopHex = async (query, corsProxy = true) => {
-
   const res = corsProxy
     ? await fetch(`${CORS_PROXY}${encodeURIComponent(URL + query)}`).then(res => res.json()).then(json => json.contents)
     : await fetch(URL + query).then(res => res.text())
   ;
   const html = (new DOMParser()).parseFromString(res, 'text/html');
 
-  const rgbRaw = html.querySelector('a.freshButton').style.backgroundColor;
-  const hex = rgb2hex(rgbRaw);
-  const rgb = hex2rgb(hex);
-  const tally = parseInt(html.querySelector('div.buttons > button > span.tally').textContent);
+  const allTallies = [...html.querySelectorAll('div.is-mobile > div > div.buttons > button > span.tally')].map(span => parseInt(span.innerHTML));
+  const allRaw = [...html.querySelectorAll('a.freshButton')].map(a => a.style.backgroundColor);
+  const allHex = allRaw.map(raw => rgb2hex(raw));
+  const allRgb = allHex.map(hex => hex2rgb(hex));
 
-  return [hex, rgb, tally];
+  return [allTallies, allRaw, allHex, allRgb];
 }
 
 export default options => {
@@ -42,11 +41,13 @@ export default options => {
 
     fetchTopHex(e.target.value, opts.corsProxy)
       .then(arr => {
-        parent.style.backgroundColor = arr[0];
-        span.textContent = `the top match is ${arr[0]} with a tally of ${arr[2]}`;
+        const [tallies, raw, hex, rgb] = arr;
+
+        parent.style.backgroundColor = hex[0];
+        span.innerHTML = `out of ${tallies.length} <a target="_blank" href=${URL + e.target.value}>matches</a>, the top match is ${hex[0]} with a tally of ${tallies[0]}`;
         const codeText = `const colors = {
-          \t${e.target.value}: '${arr[0]}',
-          \t${e.target.value}: [${arr[1].join(', ')}],\n}
+          \t${e.target.value}: '${hex[0]}',
+          \t${e.target.value}: [${rgb[0].join(', ')}],\n}
         `.replace(/[ \t\r]+/g, ' ').replace(/\n+ /g, '\n  ');
         pre.children[0].textContent = codeText;
       })
