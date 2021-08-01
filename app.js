@@ -47,7 +47,7 @@ const loadPrefs = () => {
     show_colornamer: false,
     opts_solarnoon: {},
     opts_coloravatar: { loud: true, approximateColorNames: true },
-    opts_colornamer: { corsProxy: false },
+    opts_colornamer: { corsProxy: true },
     ...getPrefs()
   };
   updatePrefs(prefs);
