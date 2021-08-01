@@ -1,3 +1,6 @@
+import { hex2rgb } from '../utils/utils.js';
+import { colorsRgb } from '../data/colors.js';
+
 const COLORS = 256 ** 3; // number of colors in rgb integer space
 const PRIMES = [
   2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37,
@@ -7,7 +10,7 @@ const PRIMES = [
   223, 227, 229, 233, 239, 241, 251
 ]; // there are 55 prime numbers that are less than 255. Remember 255 = 3 * 5 * 17
 
-const makeGradient = (hash, numOfColors = 2, deg = 0, gradientType = 'linear-gradient', loud = false) => {
+const makeGradient = (hash, numOfColors = 2, deg = 0, gradientType = 'linear', loud = false, onlyArgs = false) => {
   const args = [];
 
   if (deg) args.push(deg + 'deg');
@@ -15,8 +18,9 @@ const makeGradient = (hash, numOfColors = 2, deg = 0, gradientType = 'linear-gra
     makeColor(hash, PRIMES[Math.max(((i + 1) * 41) % (PRIMES.length - 1), 6)])
   );
 
-  if (loud) console.log(`${gradientType}(${args.join(', ')})`);
-  return `${gradientType}(${args.join(', ')})`;
+  if (loud) console.log(`${gradientType}-gradient(${args.join(', ')})`);
+  if (onlyArgs) return args;
+  return `${gradientType}-gradient(${args.join(', ')})`;
 };
 
 const makeColor = (hash, prime = 211) => {
@@ -25,19 +29,34 @@ const makeColor = (hash, prime = 211) => {
   return '#' + '0'.repeat(6 - hex.length) + hex;
 }
 
-const coloravatar = (loud = false) => {
+const text2Hash = text => parseInt(text 
+  .split('')
+  .reduce((acc, char) => (acc * char.charCodeAt(0)) % Number.MAX_SAFE_INTEGER, 1)
+);
+
+export default (options) => {
+  // default options
+  const opts = {
+    loud: false,
+    approximateColorNames: false,
+    numberOfAvatars: 5,
+    ...options
+  };
+
+  // create parent element
   const parent = document.createElement('div');
   parent.className = 'color-avatar';
 
   // create input and avatar divs
   const inpName = document.createElement('input');
   const avatars = [];
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < opts.numberOfAvatars; i++) {
     const div = document.createElement('div');
     div.className = 'avatar';
     avatars.push(div);
   }
   inpName.type = 'text';
+  const spnColorNames = document.createElement('span');
 
   // add change handler to input
   inpName.addEventListener('input', e => {
@@ -45,30 +64,57 @@ const coloravatar = (loud = false) => {
     e.target.value = e.target.value.trim();
 
     // turn input into hex color
-    const hash = parseInt(e.target.value
-      .split('')
-      .reduce((acc, char) => (acc * char.charCodeAt(0)) % Number.MAX_SAFE_INTEGER, 1)
-    ) % COLORS;
-    
-    const deg = (hash % 360);
+    const hash = text2Hash(e.target.value) % COLORS;
 
-    if (loud) console.log(hash);
+    if (opts.loud) console.log(hash);
 
     // update color of avatar
-    const avatars = document.querySelectorAll('.avatar');
-    for (let i = 0; i < avatars.length; i++) {
-      avatars[i].style.background = makeGradient(hash, i + 2, deg, 'linear-gradient', loud);
+    const domAvatars = document.querySelectorAll('.avatar');
+    for (let i = 0; i < domAvatars.length; i++) {
+      domAvatars[i].style.background = makeGradient(hash, i + 2, hash % 360, 'linear', i === avatars.length - 1 && opts.loud);
     }
-    // document.querySelectorAll('.avatar').style.background = `linear-gradient(
-    //   ${deg}deg, 
-    //   ${makeColor(hash)}, 
-    //   ${makeColor(hash, 181)}
-    // `;
+
+    // approximate color names
+    if (opts.approximateColorNames) spnColorNames.textContent = approximateColorNames(text2Hash(inpName.value), opts.numberOfAvatars + 1, opts.loud);
   });
 
   // append children and return parent
   parent.append(inpName, ...avatars);
+  if (opts.approximateColorNames) parent.append(spnColorNames);
   return parent;
 }
 
-export default coloravatar;
+const approximateColorNames = (hash, num, loud) => {
+  const span = document.createElement('span');
+
+  const colorsHex = makeGradient(hash, num, null, undefined, false, true);
+  const colors = colorsHex.map(hex => hex2rgb(hex));
+  const matches = [];
+
+  for (let i = 0; i < num; i++) {
+    let distClosest = 999;
+    let nameClosest = null;
+    Object.entries(colorsRgb).forEach(([key, val]) => {
+      const dist = Math.sqrt(
+        (colors[i][0] - val[0]) ** 2
+        + (colors[i][1] - val[1]) ** 2
+        + (colors[i][2] - val[2]) ** 2
+      );
+
+      if (dist < distClosest) {
+        distClosest = dist;
+        nameClosest = key;
+      }
+    });
+
+    matches.push({
+      color: colorsHex[i],
+      match: nameClosest,
+      dist: distClosest
+    });
+  }
+
+  if (loud) console.log(matches);
+
+  return matches.map(obj => obj.match).join(', ');
+}
