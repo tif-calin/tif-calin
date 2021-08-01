@@ -62,4 +62,4 @@ export default {
   'xanthic': '#666057',
   'yellow': '#ffff00',
   'zaffre': '#0014a8'
-  };
+};
