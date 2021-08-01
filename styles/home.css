@@ -8,11 +8,29 @@ main > nav {
   margin: 1rem;
 }
 
+#toy-container {
+  counter-reset: toyCounter;
+}
+
 #toy-container > * {
-  margin: 1rem;
+  margin-left: 1rem;
+}
+
+#toy-container > .toy {
   padding: 1rem;
   border-radius: 5px;
   border: 1px solid #ccc;
+}
+
+#toy-container > .toy-title {
+  margin-top: 1rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  counter-increment: toyCounter;
+}
+
+#toy-container > .toy-title::before {
+  content: counter(toyCounter) '. ';
 }
 
 /* solar-noon */
