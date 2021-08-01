@@ -1,3 +1,12 @@
+const getSolarNoonData = async (lat, lng) => {
+  const URL = `https://api.sunrise-sunset.org/json?lat=${lat}&lng=${lng}&formatted=0`;
+  return await fetch(URL)
+    .then(res => res.json())
+    .then(json => json.results)
+    .catch(err => console.log(err))
+  ;
+};
+
 const solarNoon = async (options, lat = 33.685, lng = -117.827) => {
   const opts = {
     ...options
@@ -7,12 +16,7 @@ const solarNoon = async (options, lat = 33.685, lng = -117.827) => {
   const parent = document.createElement('div');
 
   // get data
-  const URL = `https://api.sunrise-sunset.org/json?lat=${lat}&lng=${lng}&formatted=0`;
-  const data = await fetch(URL)
-    .then(res => res.json())
-    .then(json => json.results)
-    .catch(err => console.log(err))
-  ;
+  const data = await getSolarNoonData(lat, lng);
 
   // useful maths
   const now = new Date();

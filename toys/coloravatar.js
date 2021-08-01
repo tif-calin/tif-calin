@@ -32,7 +32,7 @@ const makeColor = (hash, prime = 211) => {
 const text2Hash = text => parseInt(text 
   .split('')
   .reduce((acc, char) => (acc * char.charCodeAt(0)) % Number.MAX_SAFE_INTEGER, 1)
-);
+) % COLORS;
 
 export default (options) => {
   // default options
@@ -64,7 +64,7 @@ export default (options) => {
     e.target.value = e.target.value.trim();
 
     // turn input into hex color
-    const hash = text2Hash(e.target.value) % COLORS;
+    const hash = text2Hash(e.target.value);
 
     if (opts.loud) console.log(hash);
 
@@ -85,8 +85,6 @@ export default (options) => {
 }
 
 const approximateColorNames = (hash, num, loud) => {
-  const span = document.createElement('span');
-
   const colorsHex = makeGradient(hash, num, null, undefined, false, true);
   const colors = colorsHex.map(hex => hex2rgb(hex));
   const matches = [];
@@ -117,4 +115,4 @@ const approximateColorNames = (hash, num, loud) => {
   if (loud) console.log(matches);
 
   return matches.map(obj => obj.match).join(', ');
-}
+};
