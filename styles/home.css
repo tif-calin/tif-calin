@@ -69,3 +69,13 @@ main > nav {
   height: 2rem;
   border-radius: 5px;
 }
+
+/* color-namer */
+.color-namer {
+  display: flex;
+  flex-direction: column;
+}
+
+.color-namer > span {
+  margin-top: 1rem;
+}
