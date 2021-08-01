@@ -23,7 +23,6 @@ main > nav {
   display: grid;
   margin: 0;
   padding: 0;
-  border: 1px solid black;
 }
 
 .solar-noon-visual > div {
@@ -49,14 +48,19 @@ main > nav {
 .solar-noon-visual > div > div {
   width: 0;
   height: 100%;
-  border-left: 4px double gray;
+  border-left: 1px double gray;
 }
 
 /* color-avatar */
 .color-avatar {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
+}
+
+.color-avatar > input {
+  width: 100%;
 }
 
 .color-avatar .avatar {
