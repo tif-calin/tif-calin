@@ -4,7 +4,11 @@ const solarNoon = async (lat = 33.685, lng = -117.827) => {
 
   // get data
   const URL = `https://api.sunrise-sunset.org/json?lat=${lat}&lng=${lng}&formatted=0`;
-  const data = (await fetch(URL).then(res => res.json())).results;
+  const data = await fetch(URL)
+    .then(res => res.json())
+    .then(json => json.results)
+    .catch(err => console.log(err))
+  ;
 
   // useful maths
   const now = new Date();
