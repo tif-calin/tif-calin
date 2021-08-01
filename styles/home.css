@@ -1,1 +1,64 @@
 @import url('./_style.css');
+
+main > nav {
+  margin: 1rem;
+}
+
+#toy-container > *{
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+/* solar-noon */
+.solar-noon-visual {
+  width: 100%;
+  height: 2rem;
+  background-color: #000a;
+  display: grid;
+  margin: 0;
+  padding: 0;
+  border: 1px solid black;
+}
+
+.solar-noon-visual > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.solar-noon-visual > div:first-child {
+  background-color: #b5d6e0cc;
+}
+.solar-noon-visual > div:nth-child(2) {
+  background: linear-gradient(90deg, #b5d6e0, #c7e1e5, #ffef7a, #f7c16a, #f46a55);
+}
+.solar-noon-visual > div:last-child {
+  background-color: #f46a55cc;
+}
+
+.solar-noon-visual > div > div {
+  width: 0;
+  height: 100%;
+  border-left: 4px double gray;
+}
+
+/* color-avatar */
+.color-avatar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.color-avatar .avatar {
+  margin-left: 1rem;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 5px;
+  background-color: #abc;
+}
