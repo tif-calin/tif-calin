@@ -3,18 +3,12 @@ import solarNoon from './toys/solarnoon.js';
 import colorAvatar from './toys/coloravatar.js';
 import colorNamer from './toys/colornamer.js';
 
-// get prefs from localStorage if exist
-const prefs = {
-  show_solarnoon: true,
-  show_coloravatar: true,
-  show_colornamer: true,
-  opts_solarnoon: {},
-  opts_coloravatar: { loud: true, approximateColorNames: true },
-  opts_colornamer: { corsProxy: false },
-  ...getPrefs()
-};
+// grab dom elements
+const settingsContainer = document.getElementById('settings-container');
+const toyContainer = document.querySelector('#toy-container');
 
-// toy info
+// state
+let prefs = {};
 const toyInfo = {
   solarnoon: {
     name: 'solar noon',
@@ -33,16 +27,60 @@ const toyInfo = {
   }
 };
 
-// load toys
-const toyContainer = document.querySelector('#toy-container');
+// functions
+const loadToy = async key => {
+  const toyTitle = document.createElement('h3');
+  toyTitle.name = key;
+  toyTitle.innerHTML = toyInfo[key].name;
+  toyTitle.classList.add('toy-title');
+  const toy = await toyInfo[key].renderer(prefs['opts_' + key]);
+  toy.classList.add('toy');
+  toy.name = key;
+  toyContainer.append(toyTitle, toy);
+};
 
-Object.keys(toyInfo).forEach(async key => {
-  if (prefs['show_'+key]) {
-    const toyTitle = document.createElement('h3');
-    toyTitle.innerHTML = toyInfo[key].name;
-    toyTitle.classList.add('toy-title');
-    const toy = await toyInfo[key].renderer(prefs['opts_'+key]);
-    toy.classList.add('toy');
-    toyContainer.append(toyTitle, toy);
+// get prefs from localStorage if exist
+const loadPrefs = () => {
+  prefs = {
+    show_solarnoon: true,
+    show_coloravatar: true,
+    show_colornamer: false,
+    opts_solarnoon: {},
+    opts_coloravatar: { loud: true, approximateColorNames: true },
+    opts_colornamer: { corsProxy: false },
+    ...getPrefs()
+  };
+  updatePrefs(prefs);
+
+  // generate checkboxes for each toy
+  for (let toy of Object.keys(toyInfo)) {
+    const chk = document.createElement('input');
+    chk.type = 'checkbox';
+    chk.name = toy;
+    if (prefs['show_' + toy]) chk.checked = true;
+    const lbl = document.createElement('label');
+    lbl.textContent = toyInfo[toy].name;
+
+    // add event listener to handle checkbox change
+    chk.addEventListener('change', async e => {
+      const key = e.target.name;
+
+      // // load or remove the toy
+      // if (!prefs['show_' + key]) loadToy(key);
+      // else document.querySelectorAll(`.toy[name=${key}], .toy-title[name=${key}]`).forEach(el => el.remove());
+
+      // update state
+      prefs['show_' + toy] = chk.checked;
+      // update localStorage
+      updatePrefs(prefs);
+    });
+
+    settingsContainer.append(chk, lbl);
   }
+};
+loadPrefs()
+
+// load toys
+Object.keys(toyInfo).forEach(async key => {
+  if (prefs['show_' + key]) loadToy(key);
 });
