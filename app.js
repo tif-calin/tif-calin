@@ -4,6 +4,6 @@ import colorNamer from './toys/colornamer.js';
 
 const toyContainer = document.querySelector('#toy-container');
 
-toyContainer.appendChild(await solarNoon());
+toyContainer.appendChild(await solarNoon({ }));
 toyContainer.appendChild(colorAvatar({ loud: true, approximateColorNames: true }));
-toyContainer.appendChild(colorNamer({}));
+toyContainer.appendChild(colorNamer({ corsProxy: false }));
