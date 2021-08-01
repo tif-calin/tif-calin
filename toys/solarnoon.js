@@ -20,14 +20,17 @@ const solarNoon = async (lat = 33.685, lng = -117.827) => {
   const sunrise_hours = sunrise.getHours() + (sunrise.getMinutes() / 60);
   const sunset_hours = sunset.getHours() + (sunset.getMinutes() / 60);
 
-  // make span
+  // make span and findmylocation button
   const spnRelativeTime = document.createElement('span');
-  spnRelativeTime.innerHTML = `
+  const btnLocation = document.createElement('button');
+  btnLocation.textContent = '📍';
+  spnRelativeTime.textContent = `
     it is 
     ${Math.round((now - solarNoon) / 360000 ) / 10} hours 
     ${(now - solarNoon) > 0 ? 'after' : 'until'} solar noon 
     (${solarNoon.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }).toLowerCase()})
   `;
+  //spnRelativeTime.appendChild(btnLocation);
 
   // make the visual
   const visual = document.createElement('div');
@@ -49,8 +52,7 @@ const solarNoon = async (lat = 33.685, lng = -117.827) => {
   children[2].title = `the sun sleeps at ${sunset.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }).toLowerCase()}`
 
   // append to parent
-  parent.appendChild(spnRelativeTime);
-  parent.appendChild(visual);
+  parent.append(spnRelativeTime, visual);
 
   return parent;
 };
