@@ -1,4 +1,8 @@
-const solarNoon = async (lat = 33.685, lng = -117.827) => {
+const solarNoon = async (options, lat = 33.685, lng = -117.827) => {
+  const opts = {
+    ...options
+  }
+
   // make the parent dom element
   const parent = document.createElement('div');
 
