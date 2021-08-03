@@ -528,5 +528,329 @@ const cssColorsRgb = {
   "yellowgreen": [154, 205, 50]
 }
 
-export { cssColors, cssColorsRgb, colorsRgb };
+const wikiColors = {
+  "aero": "#7cb9e8",
+  "amber": "#ffbf00",
+  "aqua": "#00ffff",
+  "aquamarine": "#7fffd4",
+  "asparagus": "#87a96b",
+  "bisque": "#ffe4c4",
+  "black": "#000000",
+  "blue": "#0000ff",
+  "bronze": "#cd7f32",
+  "carmine": "#960018",
+  "celadon": "#ace1af",
+  "cerulean": "#007ba7",
+  "charcoal": "#36454f",
+  "coral": "#ff7f50",
+  "crimson": "#dc143c",
+  "cyan": "#00ffff",
+  "eggshell": "#f0ead6",
+  "eigengrau": "#16161d",
+  "emerald": "#50c878",
+  "feldgrau": "#4d5d53",
+  "firebrick": "#b22222",
+  "gainsboro": "#dcdcdc",
+  "glaucous": "#6082b6",
+  "green": "#00ff00",
+  "heliotrope": "#df73ff",
+  "honeydew": "#f0fff0",
+  "indigo": "#4b0082",
+  "ivory": "#fffff0",
+  "jade": "#00a86b",
+  "linen": "#faf0e6",
+  "magenta": "#ff00ff",
+  "olive": "#808000",
+  "orchid": "#da70d6",
+  "periwinkle": "#ccccff",
+  "pink": "#ffc0cb",
+  "red": "#ff0000",
+  "rose": "#ff007f",
+  "ruby": "#e0115f",
+  "salmon": "#fa8072",
+  "scarlet": "#ff2400",
+  "seashell": "#fff5ee",
+  "silver": "#c0c0c0",
+  "snow": "#fffafa",
+  "tan": "#d2b48c",
+  "taupe": "#483c32",
+  "teal": "#008080",
+  "thistle": "#d8bfd8",
+  "turquoise": "#40e0d0",
+  "ultramarine": "#3f00ff",
+  "viridian": "#40826d",
+  "white": "#ffffff",
+  "xanadu": "#738678",
+  "yellow": "#ffff00"
+};
+
+const wikiColorsRgb = {
+  "aero": [
+    49,
+    73,
+    91
+  ],
+  "amber": [
+    100,
+    75,
+    0
+  ],
+  "aqua": [
+    0,
+    100,
+    100
+  ],
+  "aquamarine": [
+    50,
+    100,
+    83
+  ],
+  "asparagus": [
+    53,
+    66,
+    42
+  ],
+  "bisque": [
+    100,
+    89,
+    77
+  ],
+  "black": [
+    0,
+    0,
+    0
+  ],
+  "blue": [
+    0,
+    0,
+    100
+  ],
+  "bronze": [
+    80,
+    50,
+    20
+  ],
+  "carmine": [
+    59,
+    0,
+    9
+  ],
+  "celadon": [
+    67,
+    88,
+    69
+  ],
+  "cerulean": [
+    0,
+    48,
+    65
+  ],
+  "charcoal": [
+    21,
+    27,
+    31
+  ],
+  "coral": [
+    100,
+    50,
+    31
+  ],
+  "crimson": [
+    86,
+    8,
+    24
+  ],
+  "cyan": [
+    0,
+    100,
+    100
+  ],
+  "eggshell": [
+    94,
+    92,
+    84
+  ],
+  "eigengrau": [
+    9,
+    9,
+    11
+  ],
+  "emerald": [
+    31,
+    78,
+    47
+  ],
+  "feldgrau": [
+    30,
+    36,
+    33
+  ],
+  "firebrick": [
+    70,
+    13,
+    13
+  ],
+  "gainsboro": [
+    86,
+    86,
+    86
+  ],
+  "glaucous": [
+    38,
+    51,
+    71
+  ],
+  "green": [
+    0,
+    100,
+    0
+  ],
+  "heliotrope": [
+    87,
+    45,
+    100
+  ],
+  "honeydew": [
+    94,
+    100,
+    94
+  ],
+  "indigo": [
+    29,
+    0,
+    51
+  ],
+  "ivory": [
+    100,
+    100,
+    94
+  ],
+  "jade": [
+    0,
+    66,
+    42
+  ],
+  "linen": [
+    98,
+    94,
+    90
+  ],
+  "magenta": [
+    100,
+    0,
+    100
+  ],
+  "olive": [
+    50,
+    50,
+    0
+  ],
+  "orchid": [
+    85,
+    44,
+    84
+  ],
+  "periwinkle": [
+    80,
+    80,
+    100
+  ],
+  "pink": [
+    100,
+    75,
+    80
+  ],
+  "red": [
+    100,
+    0,
+    0
+  ],
+  "rose": [
+    100,
+    0,
+    50
+  ],
+  "ruby": [
+    88,
+    7,
+    37
+  ],
+  "salmon": [
+    98,
+    50,
+    45
+  ],
+  "scarlet": [
+    100,
+    14,
+    0
+  ],
+  "seashell": [
+    100,
+    96,
+    93
+  ],
+  "silver": [
+    75,
+    75,
+    75
+  ],
+  "snow": [
+    100,
+    98,
+    98
+  ],
+  "tan": [
+    82,
+    71,
+    55
+  ],
+  "taupe": [
+    28,
+    24,
+    20
+  ],
+  "teal": [
+    0,
+    50,
+    50
+  ],
+  "thistle": [
+    85,
+    75,
+    85
+  ],
+  "turquoise": [
+    25,
+    88,
+    82
+  ],
+  "ultramarine": [
+    7,
+    4,
+    56
+  ],
+  "viridian": [
+    25,
+    51,
+    43
+  ],
+  "white": [
+    100,
+    100,
+    100
+  ],
+  "xanadu": [
+    45,
+    53,
+    47
+  ],
+  "yellow": [
+    100,
+    100,
+    0
+  ]
+};
+
+export { colorsRgb, cssColors, cssColorsRgb, wikiColors, wikiColorsRgb };
 export default colors;
