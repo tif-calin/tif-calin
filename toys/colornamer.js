@@ -31,6 +31,7 @@ export default options => {
   // create children elements
   const input = document.createElement('input');
   input.type = 'text';
+  input.placeholder = 'enter in a color name to get the top matching color';
   const span = document.createElement('span');
   const pre = document.createElement('pre');
   pre.appendChild(document.createElement('code'));
@@ -47,8 +48,11 @@ export default options => {
         span.innerHTML = `out of ${tallies.length} <a target="_blank" href=${URL + e.target.value}>matches</a>, the top match is ${hex[0]} with a tally of ${tallies[0]}`;
         const codeText = `const colors = {
           \t${e.target.value}: '${hex[0]}',
-          \t${e.target.value}: [${rgb[0].join(', ')}],\n}
-        `.replace(/[ \t\r]+/g, ' ').replace(/\n+ /g, '\n  ');
+          \t${e.target.value}: [${rgb[0].join(', ')}],\n}`
+          .replace(/[ \t\r]+/g, ' ')
+          .replace(/\n+ /g, '\n  ')
+        ;
+        pre.style.padding = '1rem';
         pre.children[0].textContent = codeText;
       })
       .catch(err => console.log(err))
