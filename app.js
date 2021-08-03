@@ -7,7 +7,7 @@ import colorNamer from './toys/colornamer.js';
 const settingsContainer = document.getElementById('settings-container');
 const toyContainer = document.querySelector('#toy-container');
 
-// state
+// setup state
 let prefs = {};
 const toyInfo = {
   solarnoon: {
