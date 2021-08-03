@@ -10,6 +10,16 @@ const PRIMES = [
   223, 227, 229, 233, 239, 241, 251
 ]; // there are 55 prime numbers that are less than 255. Remember 255 = 3 * 5 * 17
 
+const text2Hash = text => parseInt(text 
+  .split('')
+  .reduce((acc, char, i) => (acc * (char.charCodeAt(0) ** i)) % Number.MAX_SAFE_INTEGER, 1)
+) % COLORS;
+
+const makeColor = (hash, prime = 211) => {
+  const hex = (((hash + prime) * prime) % (COLORS - 1)).toString(16);
+  return '#' + '0'.repeat(6 - hex.length) + hex;
+}
+
 const makeGradient = (hash, numOfColors = 2, deg = 0, gradientType = 'linear', loud = false, onlyArgs = false) => {
   const args = [];
 
@@ -19,20 +29,42 @@ const makeGradient = (hash, numOfColors = 2, deg = 0, gradientType = 'linear', l
   );
 
   if (loud) console.log(`${gradientType}-gradient(${args.join(', ')})`);
-  if (onlyArgs) return args;
-  return `${gradientType}-gradient(${args.join(', ')})`;
+  return onlyArgs ? args : `${gradientType}-gradient(${args.join(', ')})`;
 };
 
-const makeColor = (hash, prime = 211) => {
-  const hex = (((hash + prime) * prime) % (COLORS - 1)).toString(16);
+const weightedRandInt = dbl => {
+  if (dbl <= 0) return 1;
 
-  return '#' + '0'.repeat(6 - hex.length) + hex;
-}
+  let c = 1;
+  while (dbl < 1) {
+    dbl *= 2;
+    c++;
+  };
 
-const text2Hash = text => parseInt(text 
-  .split('')
-  .reduce((acc, char) => (acc * char.charCodeAt(0)) % Number.MAX_SAFE_INTEGER, 1)
-) % COLORS;
+  return c;
+};
+
+const makeSpecialGradient = (hash, loud = false, onlyArgs = false) => {
+  // decide what type of gradient to use
+  const gradientType = ['linear', 'conic', 'radial'][hash % 3];
+
+  // make gradient args
+  const args = [];
+
+  // first argument is deg and location depending on gradient type
+  const deg = `${hash % 360}deg`;
+  const loc = `at ${hash % 100}% ${(hash * PRIMES[hash % PRIMES.length]) % 100}%`;
+  if (gradientType === 'linear') args.push(deg);
+  else args.push((gradientType === 'conic') ? `from ${deg} ${loc}` : loc);
+
+  // how many colors to use
+  const numOfColors = weightedRandInt(((hash * PRIMES[hash % PRIMES.length]) % COLORS) / COLORS);
+  for (let i = 0; i < numOfColors; i++) args.push(makeColor(hash, PRIMES[Math.max(((i + 1) * 41) % PRIMES.length - 1, 7)]));
+
+  // return gradient
+  if (loud) console.log(`${gradientType}-gradient(${args.join(', ')})`);
+  return onlyArgs ? args : `${gradientType}-gradient(${args.join(', ')})`;
+};
 
 const approximateColorNames = (hash, num, loud) => {
   const colorsHex = makeGradient(hash, num, null, undefined, false, true);
@@ -77,8 +109,9 @@ const handleInputChange = (targ, opts, spnColorNames) => {
 
   // update color of avatar
   const domAvatars = document.querySelectorAll('.avatar');
-  for (let i = 0; i < domAvatars.length; i++) {
-    domAvatars[i].style.background = makeGradient(hash, i + 2, hash % 360, 'linear', i === domAvatars.length - 1 && opts.loud);
+  domAvatars[0].style.background = makeSpecialGradient(hash, opts.loud);
+  for (let i = 0; i < domAvatars.length - 1; i++) {
+    domAvatars[i + 1].style.background = makeGradient(hash, i + 2, hash % 360, 'linear', i === domAvatars.length - 1 && opts.loud);
   }
 
   // approximate color names
@@ -89,9 +122,10 @@ export default options => {
   // default options
   const opts = {
     loud: false,
-    numberOfAvatars: 5,
+    numberOfAvatars: 6,
     approximateColorNames: false,
     colorDistanceBy: 'rgb',
+    firstIsSpecial: true,
     ...options
   };
 
