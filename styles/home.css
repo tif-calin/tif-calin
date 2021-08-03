@@ -33,6 +33,10 @@ main > nav {
   content: counter(toyCounter) '. ';
 }
 
+#settings-container {
+  margin: 1rem 1rem 0 1rem;
+}
+
 /* solar-noon */
 .solar-noon-visual {
   width: 100%;
@@ -86,6 +90,7 @@ main > nav {
   width: 6rem;
   height: 6rem;
   border-radius: 5px;
+  background: #f46a55;
 }
 
 /* color-namer */
@@ -101,11 +106,7 @@ main > nav {
 
 .color-namer > input {
   margin: 0;
-  padding: 0.1rem 1rem;
   z-index: 1;
-  border: 1px solid #8f8f9d;
-  border-left: none;
-  border-right: none;
 }
 
 .color-namer > input:focus {
@@ -113,7 +114,6 @@ main > nav {
 }
 
 .color-namer pre {
-  padding: 1rem;
   background-color: whitesmoke;
   font-family: 'Courier New', Courier, monospace;
 }
