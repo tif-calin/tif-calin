@@ -15,7 +15,7 @@ const makeGradient = (hash, numOfColors = 2, deg = 0, gradientType = 'linear', l
 
   if (deg) args.push(deg + 'deg');
   for (let i = 0; i < numOfColors; i++) args.push(
-    makeColor(hash, PRIMES[Math.max(((i + 1) * 41) % (PRIMES.length - 1), 6)])
+    makeColor(hash, PRIMES[Math.max(((i + 1) * 41) % PRIMES.length - 1, 7)])
   );
 
   if (loud) console.log(`${gradientType}-gradient(${args.join(', ')})`);
@@ -33,56 +33,6 @@ const text2Hash = text => parseInt(text
   .split('')
   .reduce((acc, char) => (acc * char.charCodeAt(0)) % Number.MAX_SAFE_INTEGER, 1)
 ) % COLORS;
-
-export default (options) => {
-  // default options
-  const opts = {
-    loud: false,
-    approximateColorNames: false,
-    numberOfAvatars: 5,
-    ...options
-  };
-
-  // create parent element
-  const parent = document.createElement('div');
-  parent.className = 'color-avatar';
-
-  // create input and avatar divs
-  const inpName = document.createElement('input');
-  const avatars = [];
-  for (let i = 0; i < opts.numberOfAvatars; i++) {
-    const div = document.createElement('div');
-    div.className = 'avatar';
-    avatars.push(div);
-  }
-  inpName.type = 'text';
-  const spnColorNames = document.createElement('span');
-
-  // add change handler to input
-  inpName.addEventListener('input', e => {
-    // remove whitespace from input
-    e.target.value = e.target.value.trim();
-
-    // turn input into hex color
-    const hash = text2Hash(e.target.value);
-
-    if (opts.loud) console.log(hash);
-
-    // update color of avatar
-    const domAvatars = document.querySelectorAll('.avatar');
-    for (let i = 0; i < domAvatars.length; i++) {
-      domAvatars[i].style.background = makeGradient(hash, i + 2, hash % 360, 'linear', i === avatars.length - 1 && opts.loud);
-    }
-
-    // approximate color names
-    if (opts.approximateColorNames) spnColorNames.textContent = approximateColorNames(text2Hash(inpName.value), opts.numberOfAvatars + 1, opts.loud);
-  });
-
-  // append children and return parent
-  parent.append(inpName, ...avatars);
-  if (opts.approximateColorNames) parent.append(spnColorNames);
-  return parent;
-}
 
 const approximateColorNames = (hash, num, loud) => {
   const colorsHex = makeGradient(hash, num, null, undefined, false, true);
@@ -116,3 +66,56 @@ const approximateColorNames = (hash, num, loud) => {
 
   return matches.map(obj => obj.match).join(', ');
 };
+
+const handleInputChange = (targ, opts, spnColorNames) => {
+  // remove whitespace from input
+  targ.value = targ.value.trim();
+
+  // turn input into hex color
+  const hash = text2Hash(targ.value);
+  if (opts.loud) console.log(hash);
+
+  // update color of avatar
+  const domAvatars = document.querySelectorAll('.avatar');
+  for (let i = 0; i < domAvatars.length; i++) {
+    domAvatars[i].style.background = makeGradient(hash, i + 2, hash % 360, 'linear', i === domAvatars.length - 1 && opts.loud);
+  }
+
+  // approximate color names
+  if (opts.approximateColorNames) spnColorNames.textContent = approximateColorNames(text2Hash(targ.value), opts.numberOfAvatars + 1, opts.loud);
+};
+
+export default options => {
+  // default options
+  const opts = {
+    loud: false,
+    numberOfAvatars: 5,
+    approximateColorNames: false,
+    colorDistanceBy: 'rgb',
+    ...options
+  };
+
+  // create parent element
+  const parent = document.createElement('div');
+  parent.className = 'color-avatar';
+
+  // create input and avatar divs
+  const inpName = document.createElement('input');
+  const avatars = [];
+  for (let i = 0; i < opts.numberOfAvatars; i++) {
+    const div = document.createElement('div');
+    div.className = 'avatar';
+    avatars.push(div);
+  }
+  inpName.type = 'text';
+  inpName.placeholder = 'enter string to get unique color avatars';
+  const spnColorNames = document.createElement('span');
+
+  // add change handler to input
+  inpName.addEventListener('input', e => handleInputChange(e.target, opts, spnColorNames));
+
+  // append children and return parent
+  parent.append(inpName, ...avatars);
+  if (opts.approximateColorNames) parent.append(spnColorNames);
+  return parent;
+}
