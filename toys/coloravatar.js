@@ -1,5 +1,6 @@
 import { hex2rgb } from '../utils/utils.js';
-import { colorsRgb } from '../data/colors.js';
+import { colorsRgb, wikiColorsRgb } from '../data/colors.js';
+const RGBCOLORS = { ...wikiColorsRgb, ...colorsRgb };
 
 const COLORS = 256 ** 3; // number of colors in rgb integer space
 const PRIMES = [
@@ -74,7 +75,7 @@ const approximateColorNames = (hash, num, loud) => {
   for (let i = 0; i < num; i++) {
     let distClosest = 999;
     let nameClosest = null;
-    Object.entries(colorsRgb).forEach(([key, val]) => {
+    Object.entries(RGBCOLORS).forEach(([key, val]) => {
       const dist = Math.sqrt(
         (colors[i][0] - val[0]) ** 2
         + (colors[i][1] - val[1]) ** 2
