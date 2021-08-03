@@ -12,7 +12,7 @@ const PRIMES = [
 
 const text2Hash = text => parseInt(text 
   .split('')
-  .reduce((acc, char, i) => (acc * (char.charCodeAt(0) ** i)) % Number.MAX_SAFE_INTEGER, 1)
+  .reduce((acc, char, i) => (acc * (char.charCodeAt(0) ** (i + 1))) % Number.MAX_SAFE_INTEGER, 1)
 ) % COLORS;
 
 const makeColor = (hash, prime = 211) => {
