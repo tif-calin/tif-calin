@@ -2,6 +2,7 @@ import { getPrefs, updatePrefs } from './utils/localStorage.js';
 import solarNoon from './toys/solarnoon.js';
 import colorAvatar from './toys/coloravatar.js';
 import colorNamer from './toys/colornamer.js';
+import catfoodCostCalc from './toys/catfoodcostcalc.js';
 
 // grab dom elements
 const settingsContainer = document.getElementById('settings-container');
@@ -24,6 +25,11 @@ const toyInfo = {
     name: 'color namer',
     description: '',
     renderer: colorNamer,
+  },
+  catfoodcostcalc: {
+    name: 'catfood cost calculator',
+    description: '',
+    renderer: catfoodCostCalc
   }
 };
 
@@ -42,12 +48,14 @@ const loadToy = async key => {
 // get prefs from localStorage if exist
 const loadPrefs = () => {
   prefs = {
-    show_solarnoon: true,
+    show_solarnoon: false,
     show_coloravatar: true,
     show_colornamer: false,
+    show_catfoodcostcalc: true,
     opts_solarnoon: {},
     opts_coloravatar: { loud: true, approximateColorNames: true },
     opts_colornamer: { corsProxy: true },
+    opts_catfoodcostcalc: {},
     ...getPrefs()
   };
   updatePrefs(prefs);

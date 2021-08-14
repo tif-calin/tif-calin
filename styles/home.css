@@ -76,17 +76,21 @@ main > nav {
 /* color-avatar */
 .color-avatar {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center;
+  flex-direction: column;
 }
 
 .color-avatar > input {
   width: 100%;
 }
 
+.avatar-container {
+  margin: 1rem 0;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
 .color-avatar .avatar {
-  margin: 0.5rem 1rem 0.5rem 0;
   width: 6rem;
   height: 6rem;
   border-radius: 5px;
@@ -116,4 +120,23 @@ main > nav {
 .color-namer pre {
   background-color: whitesmoke;
   font-family: 'Courier New', Courier, monospace;
+}
+
+/* catfood-cost-calc */
+.catfood-cost-calc {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.catfood-cost-calc button {
+  text-align: left;
+  width: min-content;
+  font-weight: 600;
+  margin: 0.5rem 0;
+}
+
+.catfood-cost-calc input:read-only {
+  background-color: #f7f7f7;
+  border: 1px solid #d9d9d9;
 }
