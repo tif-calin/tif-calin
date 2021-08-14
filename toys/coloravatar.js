@@ -136,11 +136,12 @@ export default options => {
 
   // create input and avatar divs
   const inpName = document.createElement('input');
-  const avatars = [];
+  const avatars = document.createElement('div');
+  avatars.className = 'avatar-container';
   for (let i = 0; i < opts.numberOfAvatars; i++) {
     const div = document.createElement('div');
     div.className = 'avatar';
-    avatars.push(div);
+    avatars.append(div);
   }
   inpName.type = 'text';
   inpName.placeholder = 'enter string to get unique color avatars';
@@ -150,7 +151,7 @@ export default options => {
   inpName.addEventListener('input', e => handleInputChange(e.target, opts, spnColorNames));
 
   // append children and return parent
-  parent.append(inpName, ...avatars);
+  parent.append(inpName, avatars);
   if (opts.approximateColorNames) parent.append(spnColorNames);
   return parent;
 }
