@@ -1,8 +1,8 @@
-import { getPrefs, updatePrefs } from './utils/localStorage.js';
-import solarNoon from './toys/solarnoon.js';
-import colorAvatar from './toys/coloravatar.js';
-import colorNamer from './toys/colornamer.js';
-import catfoodCostCalc from './toys/catfoodcostcalc.js';
+import { getPrefs, updatePrefs } from '../utils/localStorage.js';
+import solarnoon from './solarnoon.js';
+import text2colorgradient from './text2colorgradient.js';
+import name2color from './name2color.js';
+import catfoodcostcalc from './catfoodcostcalc.js';
 
 // grab dom elements
 const settingsContainer = document.getElementById('settings-container');
@@ -12,24 +12,24 @@ const toyContainer = document.querySelector('#toy-container');
 let prefs = {};
 const toyInfo = {
   solarnoon: {
-    name: 'solar noon',
+    name: 'solarnoon',
     description: '',
-    renderer: solarNoon,
+    renderer: solarnoon,
   },
-  coloravatar: {
-    name: 'color avatar',
+  text2colorgradient: {
+    name: 'text2colorgradient',
     description: '',
-    renderer: colorAvatar,
+    renderer: text2colorgradient,
   },
-  colornamer: {
-    name: 'color namer',
+  name2color: {
+    name: 'name2color',
     description: '',
-    renderer: colorNamer,
+    renderer: name2color,
   },
   catfoodcostcalc: {
-    name: 'catfood cost calculator',
+    name: 'catfoodcostcalc',
     description: '',
-    renderer: catfoodCostCalc
+    renderer: catfoodcostcalc
   }
 };
 
@@ -49,12 +49,12 @@ const loadToy = async key => {
 const loadPrefs = () => {
   prefs = {
     show_solarnoon: false,
-    show_coloravatar: true,
-    show_colornamer: false,
+    show_text2colorgradient: true,
+    show_name2color: false,
     show_catfoodcostcalc: true,
     opts_solarnoon: {},
-    opts_coloravatar: { loud: true, approximateColorNames: true },
-    opts_colornamer: { corsProxy: true },
+    opts_text2colorgradient: { loud: true, approximateColorNames: true },
+    opts_name2color: { corsProxy: true },
     opts_catfoodcostcalc: {},
     ...getPrefs()
   };

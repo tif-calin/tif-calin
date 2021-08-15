@@ -1,4 +1,5 @@
 @import url('./_style.css');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@0100..700&display=swap');
 
 body {
   display: flex;
