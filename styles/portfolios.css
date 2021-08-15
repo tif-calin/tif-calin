@@ -1,0 +1,47 @@
+@import url('./_style.css');
+
+body {
+  display: flex;
+  justify-content: center;
+}
+
+main {
+  font-family: 'Josefin Sans', 'Inter', 'Cabin', sans-serif;
+  padding: 1rem;
+  width: clamp(360px, 50%, 1000px);
+}
+
+ul {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+ul li {
+  display: flex;
+  flex-direction: column;
+}
+
+ul li a {
+  text-decoration: none;
+}
+
+ul li span:first-child {
+  display: flex;
+  gap: 0.5rem;
+  font-weight: 500;
+  font-variation-settings: 'wght' 500;
+}
+
+ul li span:first-child span {
+  font-weight: 200;
+  font-variation-settings: 'wght' 200;
+}
+
+ul li span:first-child span::before {
+  content: '(';
+}
+
+ul li span:first-child span::after {
+  content: ')';
+}
