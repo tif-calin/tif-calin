@@ -15,7 +15,7 @@
 
 Add me on [LinkedIn](https://www.linkedin.com/in/tif-calin/)
 
-Email me at culitif@tuta.io
+Email me at culitif [at] tuta.io
 
 <a href="mailto:culitif@tuta.io?subject=[GitHub]" target="_blank">
   <img src="https://img.shields.io/badge/e%E2%80%91mail-D14836.svg?style=for-the-badge&logo=mail.ru" alt="email badge">
