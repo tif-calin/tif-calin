@@ -3,15 +3,18 @@
 
 ```json
 {
- "languages": ["javascript", "typescript", "python"],
- "backend_tools": ["postgresql", "heroku", "pgadmin", "postman", "express"],
- "testing": ["qunit", "jest", "supertest"],
- "frontend_tools": ["react", "nodejs"]
+  "languages": ["javascript", "typescript", "python"],
+  "tools": {
+    "database": ["postgresql", "pgadmin"],
+    "testing": ["qunit", "jest", "supertest"],
+    "backend": ["heroku", "nodejs", "express"],
+    "frontend": ["react", "netlify"]
+  }
 }
 ```
+<hr/>
 
 ## Hit me up!
-<hr/>
 
 Add me on [LinkedIn](https://www.linkedin.com/in/tif-calin/)
 
