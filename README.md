@@ -1,18 +1,21 @@
-# Hello! 👋 I'm [Culi](https://www.culi.page)
+# Hello! 👋 I'm [Culi](https://work.culi.page/)
 **pronouns**: *they/them* or *he/him*
 
+**site**: [work.culi.page](https://work.culi.page/)
+
+**skills**:
 ```json
 {
-  "languages": ["javascript", "typescript", "python"],
+  "languages": ["javascript", "typescript", "python", "css", "html", "sql", "svg"],
   "tools": {
-    "database": ["postgresql", "pgadmin"],
-    "testing": ["qunit", "jest", "supertest"],
+    "database": ["postgresql", "pgadmin", "postman", "redis"],
+    "testing": ["qunit", "jest", "supertest", "react testing library"],
     "backend": ["heroku", "nodejs", "express"],
-    "frontend": ["react", "netlify"]
+    "frontend": ["react", "netlify", "nextjs", "sass", "css-in-js"],
+    "apis": ["cloudinary", "algolia", "twilio"]
   }
 }
 ```
-<hr/>
 
 ## Hit me up!
 
