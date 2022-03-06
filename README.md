@@ -1,32 +1,11 @@
 # Hello! 👋 I'm [Culi](https://work.culi.page/)
-**pronouns**: *they/them* or *he/him*
 
-**site**: [work.culi.page](https://work.culi.page/)
+**My portfolio**: [work.culi.page](https://work.culi.page/)
 
-**skills**:
-```json
-{
-  "languages": ["javascript", "typescript", "python", "css", "html", "sql", "svg"],
-  "tools": {
-    "database": ["postgresql", "pgadmin", "postman", "redis"],
-    "testing": ["qunit", "jest", "supertest", "react testing library"],
-    "backend": ["heroku", "nodejs", "express"],
-    "frontend": ["react", "netlify", "nextjs", "sass", "css-in-js"],
-    "apis": ["cloudinary", "algolia", "twilio"]
-  }
-}
-```
+**About me**: I'm a full-stack engineer with a background in mathematics and an interest in community. I do a bit of everything (design, frontend, backend, data, testing, etc), but I have the most fun working on challenging "math-y" problems/algorithms, playing with data, and building beautiful and accessible front-ends (esp. data visualization).
 
-## Hit me up!
+**Languages I'm comfortable with**: Javascript/TypeScript (React, NodeJS), Python (data, ai, scraping, etc), Ruby (Rails)
 
-Add me on [LinkedIn](https://www.linkedin.com/in/tif-calin/)
+**Languages I wanna learn next**: Rust, Elm, Elixir, GDScript
 
-Email me at culitif [at] tuta.io
-
-<a href="mailto:culitif@tuta.io?subject=[GitHub]" target="_blank">
-  <img src="https://img.shields.io/badge/e%E2%80%91mail-D14836.svg?style=for-the-badge&logo=mail.ru" alt="email badge">
-</a>
-<a href="https://www.linkedin.com/in/tif-calin/" target="_blank">
-  <img src="https://img.shields.io/badge/linkedin-%231E77B5.svg?&style=for-the-badge&logo=linkedin" alt="linkedin badge">
-</a>
-
+**Topics I wanna dive in deeper into**: generative algorithms, evolutionary algorithms, machine learning in general.
