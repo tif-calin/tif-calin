@@ -1,6 +1,6 @@
 # Hello! 👋 I'm [Culi](https://culi.page/)
 
-**My portfolio**: [work.culi.page](https://work.culi.page/)
+**My portfolio**: [work.culi.page](https://work.culi.page/) (being rebuilt at https://work-culi-page-2fresh.deno.dev/)
 
 **Latest project**: [votevote](https://votevote.page/) (2022-02feb)
 
