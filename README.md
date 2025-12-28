@@ -1,9 +1,5 @@
 # Hello! 👋 I'm [Culi](https://culi.page/)
 
-**My portfolio**: [work.culi.page](https://work.culi.page/) (being rebuilt in Fresh at [over here](https://fresh.work.culi.page/))
-
-**Latest project**: [votevote](https://votevote.page/) (2022-02)
-
 **About me**: I'm a software engineer and web developer with a background in mathematics, a focus on cooperation, and an interest in working on any projects promoting and supporting community. 
 
 **Languages I'm comfortable with**: Javascript/TypeScript (React, NodeJS), Python (data, ai, scraping, etc), Ruby (Rails)
